@@ -1,7 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { FaChair } from 'react-icons/fa';
+import { useGlobalStyles } from '../contexts/GlobalStylesContext';
+
 
 function Seat({ seat }) {
+    const { globalStyles } = useGlobalStyles();
     const [showTooltip, setShowTooltip] = useState(false);
     const divRef = useRef(null);
     const [color, setColor] = useState('bg-blue-200');
@@ -37,7 +40,7 @@ function Seat({ seat }) {
     }
 
     return (
-        <div style={{ position: 'relative' }}>
+        <div className={`   ${globalStyles.shadowrounded} `} style={{ position: 'relative' }}>
 
             {seat.available ? (
                 <div
