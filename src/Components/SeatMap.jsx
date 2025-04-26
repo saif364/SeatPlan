@@ -137,6 +137,10 @@ function SeatMap() {
                         <div className={`m-2 p-2 box-border bg-blue-100 ${globalStyles.shadowrounded}`}>
                             <div>
                                 <h1 className="text-1xl font-bold">
+                                    Flight Number  :{' '}
+                                    {segment?.flight?.flightNumber}
+                                </h1>
+                                <h1 className="text-1xl font-bold">
                                     Departure :{' '}
                                     {segment?.departure ? new Date(segment.departure).toLocaleString() : 'No Departure Time Available'}
                                 </h1>
@@ -148,6 +152,14 @@ function SeatMap() {
                                 <h1 className="text-1xl font-bold">
                                     Duration :{' '}
                                     {segment?.duration} hours
+                                </h1>
+                                <h1 className="text-1xl font-bold">
+                                    Departure Terminal :{' '}
+                                    {segment?.flight?.departureTerminal}
+                                </h1>
+                                <h1 className="text-1xl font-bold">
+                                    Arrival Terminal :{' '}
+                                    {segment?.flight?.arrivalTerminal}
                                 </h1>
                             </div>
                             <div></div>
