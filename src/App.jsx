@@ -14,7 +14,6 @@ function App() {
       <GlobalStylesProvider>
         <div className="App">
           <SeatMap />
-
         </div>
       </GlobalStylesProvider>
 

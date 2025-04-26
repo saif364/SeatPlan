@@ -115,7 +115,7 @@ function Seat({ seat }) {
                             height: '0',
                             borderLeft: '5px solid transparent',
                             borderRight: '5px solid transparent',
-                            borderTop: '10px solid #f9f9f9', // Match the tooltip background color
+                            borderTop: '10px solid white', // Match the tooltip background color
                         }}
                     ></div>
                 </div>

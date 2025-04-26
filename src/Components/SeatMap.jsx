@@ -5,12 +5,15 @@ import Seat from './Seat';
 import React from 'react';
 import { FaChair } from 'react-icons/fa';
 import { useGlobalStyles } from '../contexts/GlobalStylesContext';
+import { FaPlane } from 'react-icons/fa';
+import StepNav from '../components/StepNav';
 
 function SeatMap() {
     const { globalStyles } = useGlobalStyles();
     const [seatMap, setSeatMap] = useState(null);
     const [passenger, setPassenger] = useState(null);
     const [seatRows, setseatRows] = useState(null);
+    const [segment, setsegment] = useState(null);
 
 
     useEffect(() => {
@@ -18,9 +21,13 @@ function SeatMap() {
 
             const seatMapData = data.seatsItineraryParts[0]?.segmentSeatMaps[0]?.passengerSeatMaps[0]?.seatMap;
             setSeatMap(seatMapData);
+            setseatRows(seatMapData?.cabins[0]?.seatRows);
+
             const passengers = data.seatsItineraryParts[0]?.segmentSeatMaps[0]?.passengerSeatMaps[0]?.passenger;
             setPassenger(passengers);
-            setseatRows(seatMapData?.cabins[0]?.seatRows);
+
+            const segments = data.seatsItineraryParts[0]?.segmentSeatMaps[0]?.segment;
+            setsegment(segments);
         } catch (error) {
             console.error('Error fetching seats:', error);
         }
@@ -32,6 +39,11 @@ function SeatMap() {
     return (
         <>
             <div className='p-2 grid   bg-gray-50 mx-auto'>
+
+
+                <div>
+                    <StepNav />
+                </div>
 
                 <div className={`p-4 bg-blue-100   text-center my-4 ${globalStyles.shadowrounded}`}>
                     {seatMap ? (
@@ -113,9 +125,12 @@ function SeatMap() {
                     </div>
                     <div className={`col-span-1 bg-gray-100 ${globalStyles.shadowrounded}`}>
 
-                        <div className={`p-4 bg-blue-100 rounded-lg shadow-md text-center m-2 `}>
-                            <h2 className='text-3xl font-bold text-blue-700'>Dhaka to Kuala Lumpur</h2>
-                            <p className='text-lg text-blue-500'>Enjoy your flight with comfort and style!</p>
+                        <div className={`p-2   bg-blue-100 ${globalStyles.shadowrounded} m-2 flex justify-center items-center`}>
+                            <h2 className='text-2xl font-bold text-blue-700 pe-4'> {segment?.origin}   </h2>
+                            <FaPlane className='text-2xl font-bold text-blue-700 ' />
+                            <h2 className='text-2xl font-bold text-blue-700 ps-4'>  {segment?.destination}</h2>
+                            <h2 className='text-2xl font-bold text-blue-700 ps-4'> </h2>
+
                         </div>
 
 
@@ -123,7 +138,7 @@ function SeatMap() {
 
                 </div>
 
-            </div>
+            </div >
         </>
     )
 }
