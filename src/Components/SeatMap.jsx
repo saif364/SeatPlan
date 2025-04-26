@@ -45,7 +45,7 @@ function SeatMap() {
                     <StepNav />
                 </div>
 
-                <div className={`p-4 bg-blue-100   text-center my-4 ${globalStyles.shadowrounded}`}>
+                <div className={`bg-blue-100   text-center my-2 ${globalStyles.shadowrounded}`}>
                     {seatMap ? (
                         <div className="text-center">
                             <p className='text-3xl font-bold text-blue-700'>Boeing {seatMap.aircraft}</p>
