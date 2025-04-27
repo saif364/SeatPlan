@@ -65,11 +65,11 @@ function SeatMap() {
                             </p>
                         </div>
                         <div className="m-2 p-2 box-border bg-gray-100 rounded-lg shadow-md">
-                            <div>
-                                <h1 className="text-2xl font-bold">Legend</h1>
+                            <div  >
+                                <h1 className="ps-2 text-2xl font-bold">Legend</h1>
                             </div>
                             <div>
-                                <div className="flex items-center justify-start mb-2">
+                                <div className="flex items-center justify-start mb-2 shadow-md p-2 rounded-2xl bg-white">
                                     <div className="w-4 h-4 bg-gray-400 rounded-full mr-2"></div>
                                     Available &nbsp; &nbsp;
                                     <div
@@ -79,7 +79,7 @@ function SeatMap() {
                                         <FaChair size={40} color="black" />
                                     </div>
                                 </div>
-                                <div className="flex items-center justify-start mb-2">
+                                <div className="flex items-center justify-start mb-2 shadow-md p-2 rounded-2xl bg-white">
                                     <div className="w-4 h-4 bg-gray-400 rounded-full mr-2"></div>
                                     UnAvailable
                                     <div
@@ -89,7 +89,7 @@ function SeatMap() {
                                         <FaChair size={40} color="darkgray" />
                                     </div>
                                 </div>
-                                <div className="flex items-center">
+                                <div className="flex items-center justify-start mb-2 shadow-md p-2 rounded-2xl bg-white">
                                     <div className="w-4 h-4 bg-gray-400 rounded-full mr-2"></div>
                                     Selected &nbsp; &nbsp; &nbsp;
                                     <div
@@ -136,37 +136,37 @@ function SeatMap() {
                         </div>
                         <div className={`m-2 p-2 box-border bg-gray-100 ${globalStyles.shadowrounded}`}>
                             <div>
-                                <div className="flex items-center justify-start mb-2">
+                                <div className="flex items-center justify-start mb-2 shadow-md p-2 rounded-2xl bg-white">
                                     <div className="w-4 h-4 bg-gray-400 rounded-full mr-2"></div>
                                     Flight Number  :{' '}
                                     {segment?.flight?.flightNumber}
                                 </div>
 
-                                <div className="flex items-center justify-start mb-2">
+                                <div className="flex items-center justify-start mb-2 shadow-md p-2 rounded-2xl bg-white">
                                     <div className="w-4 h-4 bg-gray-400 rounded-full mr-2"></div>
                                     Departure :{' '}
                                     {segment?.departure ? new Date(segment.departure).toLocaleString() : 'No Departure Time Available'}
                                 </div>
 
-                                <div className="flex items-center justify-start mb-2">
+                                <div className="flex items-center justify-start mb-2 shadow-md p-2 rounded-2xl bg-white">
                                     <div className="w-4 h-4 bg-gray-400 rounded-full mr-2"></div>
                                     Arrival :{' '}
                                     {segment?.departure ? new Date(segment.arrival).toLocaleString() : 'No Departure Time Available'}
                                 </div>
 
-                                <div className="flex items-center justify-start mb-2">
+                                <div className="flex items-center justify-start mb-2 shadow-md p-2 rounded-2xl bg-white">
                                     <div className="w-4 h-4 bg-gray-400 rounded-full mr-2"></div>
                                     Duration :{' '}
                                     {segment?.duration} hours
                                 </div>
 
-                                <div className="flex items-center justify-start mb-2">
+                                <div className="flex items-center justify-start mb-2 shadow-md p-2 rounded-2xl bg-white">
                                     <div className="w-4 h-4 bg-gray-400 rounded-full mr-2"></div>
                                     Departure Terminal :{' '}
                                     {segment?.flight?.departureTerminal}
                                 </div>
 
-                                <div className="flex items-center justify-start mb-2">
+                                <div className="flex items-center justify-start mb-2 shadow-md p-2 rounded-2xl bg-white">
                                     <div className="w-4 h-4 bg-gray-400 rounded-full mr-2"></div>
                                     Arrival Terminal :{' '}
                                     {segment?.flight?.arrivalTerminal}
