@@ -1,24 +1,23 @@
-
-import './App.css'
-import SeatMap from './Components/SeatMap'
-import { GlobalStylesProvider } from './contexts/GlobalStylesContext'
-
+import './App.css';
+import SeatMap from './Components/SeatMap';
+import ErrorBoundary from './Components/ErrorBoundary';
+import { GlobalStylesProvider } from './contexts/GlobalStylesContext';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
-
   return (
-    <>
-      {/* <h1 className="text-3xl font-bold underline text-cyan-500">
-        Hello world!
-      </h1> */}
-      <GlobalStylesProvider>
-        <div className="App">
-          <SeatMap />
-        </div>
-      </GlobalStylesProvider>
-
-    </>
-  )
+    <GlobalStylesProvider>
+      <ErrorBoundary>
+        <Router>
+          <div className="App">
+            <Routes>
+              <Route path="/" element={<SeatMap />} />
+            </Routes>
+          </div>
+        </Router>
+      </ErrorBoundary>
+    </GlobalStylesProvider>
+  );
 }
 
-export default App
+export default App;

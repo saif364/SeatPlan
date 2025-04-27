@@ -1,6 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { FaChair } from 'react-icons/fa';
 import { useGlobalStyles } from '../contexts/GlobalStylesContext';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+
+
 
 
 function Seat({ seat }) {
@@ -9,6 +12,7 @@ function Seat({ seat }) {
     const divRef = useRef(null);
     const [color, setColor] = useState('bg-blue-200');
     const [seatType, setSeatType] = useState('');
+    const navigate = useNavigate();
 
     const handleClick = () => {
 
@@ -61,9 +65,11 @@ function Seat({ seat }) {
         };
     }, []);
 
-    const onSeatSelected = (seat) => {
+    const onSeatSelected = () => {
+        navigate('/');
         setColor('bg-green-200');
         setShowTooltip(false);
+
     }
 
     const onUnSeatSelected = () => {
@@ -111,7 +117,8 @@ function Seat({ seat }) {
                     }}
                 >
                     <div>
-                        <div className="text-sm"><span className='text-green-400 font-bold'>{seat.code} </span> {' - ' + seatType}</div>
+                        <div className="text-sm"><span className='text-green-400 font-bold'>{seat.code}
+                            : </span> {seatType}</div>
                         <div className="text-sm"> <span className='text-green-400 font-bold'>Cost:</span>  {seat?.freeOfCharge == false ? "Fee Aplied" : "Free of Cost"}</div>
                     </div>
 
