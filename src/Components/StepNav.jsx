@@ -1,8 +1,7 @@
-// src/components/StepNav.js
 import React, { useState } from 'react';
 
 const StepNav = () => {
-    const [activeStep, setActiveStep] = useState(2);  // Assuming "Seats" is the active step
+    const [activeStep, setActiveStep] = useState(2);
 
     const steps = [
         { name: "KUL CGK", icon: "✔️", isCompleted: true },
