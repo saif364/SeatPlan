@@ -14,7 +14,8 @@ function SeatMap() {
     const [passenger, setPassenger] = useState(null);
     //const [seatRows, setseatRows] = useState(null);
     const [segment, setsegment] = useState(null);
-    const [selectedSeat, setSelectedSeat] = useState(null);
+    const [selectedSeatCode, setSelectedSeatCode] = useState(null);
+    const [selectedCharacteristics, setSelectedCharacteristics] = useState(null);
 
 
     var seatRows = data.seatsItineraryParts[0]?.segmentSeatMaps[0]?.passengerSeatMaps[0]?.seatMap?.cabins[0]?.seatRows;
@@ -35,10 +36,24 @@ function SeatMap() {
             console.error('Error fetching seats:', error);
         }
     }, []);
+    function getSeatCharacteristicsByCode(seatCode) {
+        const seatRows = seatMap.cabins[0].seatRows;
 
+        for (const row of seatRows) {
+            for (const seat of row.seats) {
+                if (seat.code === seatCode) {
+                    return seat.seatCharacteristics;
+                }
+            }
+        }
+
+        return null;
+    }
 
     const handleSeatSelect = (seatCode) => {
-        setSelectedSeat(seatCode);
+        setSelectedSeatCode(seatCode);
+        var charectestics = getSeatCharacteristicsByCode(seatCode);
+        setSelectedCharacteristics(charectestics);
     };
 
 
@@ -119,7 +134,7 @@ function SeatMap() {
                                                     key={`${index}-${seatIndex}`}
                                                     seat={seat}
                                                     onSelect={handleSeatSelect}
-                                                    isSelected={selectedSeat === seat.code} />
+                                                    isSelected={selectedSeatCode === seat.code} />
                                             ) : (
                                                 <p key={`${index}-${seatIndex}`}></p>
                                             )
@@ -134,17 +149,30 @@ function SeatMap() {
                             <FaPlane className="text-2xl font-bold text-blue-700" />
                             <h2 className="text-2xl font-bold text-blue-700 ps-4">{segment?.destination}</h2>
                             <h2 className="text-2xl font-bold text-blue-700 ps-4"></h2>
-                            <div className="text-center">
-                                <h3 className="text-xl font-bold text-green-700">Price</h3>
-                                <p className="text-lg text-blue-500">
-                                    {seatRows[6]?.seats[3]?.prices?.alternatives[0][0].amount +
-                                        '/' +
-                                        seatRows[6]?.seats[3]?.prices?.alternatives[0][0].currency}
-                                </p>
-                            </div>
+
                         </div>
                         <div className={`m-2 p-2 box-border bg-gray-100 ${globalStyles.shadowrounded}`}>
                             <div>
+                                <p className={`bg-blue-100 px-2 py-1 text-xl my-2 font-bold text-blue-700 ${globalStyles.shadowrounded}`}> Selected Seat Details</p>
+
+
+                                {/* {
+                                    selectedCharacteristics.map((type) => (
+                                        <div key={type} className="flex items-center justify-start mb-2 shadow-md p-2 rounded-2xl bg-white">
+                                            <div className="w-4 h-4 bg-gray-400 rounded-full mr-2"></div>
+                                            {type}
+                                        </div>
+                                    ))
+                                } */}
+
+
+                            </div>
+                            <div></div>
+                        </div>
+                        <div className={`m-2 p-2 box-border bg-gray-100 ${globalStyles.shadowrounded}`}>
+                            <div>
+                                <p className={`bg-blue-100 px-2 py-1 text-xl my-2 font-bold text-blue-700 ${globalStyles.shadowrounded}`}>  Flight Details</p>
+
                                 <div className="flex items-center justify-start mb-2 shadow-md p-2 rounded-2xl bg-white">
                                     <div className="w-4 h-4 bg-gray-400 rounded-full mr-2"></div>
                                     Flight Number  :{' '}
