@@ -5,16 +5,18 @@ import { useGlobalStyles } from '../contexts/GlobalStylesContext';
 
 
 
-function Seat({ seat, isSelected, onSelect }) {
+function Seat({ seat, isSelected, onSelect, isUnavailable }) {
     const { globalStyles } = useGlobalStyles();
     const [showTooltip, setShowTooltip] = useState(false);
     const divRef = useRef(null);
     const [seatType, setSeatType] = useState('');
 
-    const color = isSelected ? 'bg-green-200' : seat.available ? 'bg-blue-200' : 'bg-gray-300';
+    const color = isSelected ? 'bg-green-200' : seat.available ? 'bg-blue-200' : '';
+    const unavailableColor = isUnavailable ? 'bg-gray-300' : '';
 
 
     const handleClick = () => {
+
 
         setSeat();
         setShowTooltip(!showTooltip);
@@ -78,21 +80,34 @@ function Seat({ seat, isSelected, onSelect }) {
     return (
         <div className={`   ${globalStyles.shadowrounded} `} style={{ position: 'relative' }}>
 
-            {seat.available ? (
-                <div
-                    onClick={handleClick}
-                    ref={divRef}
-                    className={`p-1 ${color} rounded-xl cursor-pointer hover:bg-blue-300 transition duration-300 ease-in-out flex flex-col justify-center items-center`}
-                    style={{ width: '60px', margin: '0 auto' }}
-                >
-                    <FaChair size={40} color="black" />
-                    <div className="text-center">
-                        <div className="font-bold text-sm">{seat.code}</div>
+            {
+
+                seat.available ? (
+                    <div
+                        onClick={handleClick}
+                        ref={divRef}
+                        className={`p-1 ${color} rounded-xl cursor-pointer hover:bg-blue-300 transition duration-300 ease-in-out flex flex-col justify-center items-center`}
+                        style={{ width: '60px', margin: '0 auto' }}
+                    >
+                        <FaChair size={40} />
+                        <div className="text-center">
+                            <div className="font-bold text-sm">{seat.code}</div>
+                        </div>
                     </div>
-                </div>
-            ) : (
-                <p></p>
-            )}
+                ) : (isUnavailable == true) ? (
+                    <div
+
+                        className={`p-1 ${unavailableColor} rounded-xl cursor-pointer flex flex-col justify-center items-center`}
+                        style={{ width: '60px', margin: '0 auto' }}
+                    >
+                        <FaChair size={40} color='darkgray' />
+                        <div className="text-center">
+                            <div className="font-bold text-sm">{seat.code}</div>
+                        </div>
+                    </div>
+                ) : (
+                    <p></p>
+                )}
             {showTooltip && (
                 <div
                     className="tooltip shadow-neutral-400 rounded-4xl bg-white text-black absolute text-left"

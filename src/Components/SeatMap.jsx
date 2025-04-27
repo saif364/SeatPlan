@@ -18,6 +18,9 @@ function SeatMap() {
     const [selectedCharacteristics, setSelectedCharacteristics] = useState([]);
 
 
+    var lastCode = null;
+
+
     var seatRows = data.seatsItineraryParts[0]?.segmentSeatMaps[0]?.passengerSeatMaps[0]?.seatMap?.cabins[0]?.seatRows;
 
     useEffect(() => {
@@ -175,19 +178,36 @@ function SeatMap() {
                             </div>
                             <div className="grid grid-cols-9 gap-2">
 
-                                {seatRows &&
+                                {
+
+                                    seatRows &&
                                     seatRows.map((row, index) =>
-                                        row.seats.map((seat, seatIndex) =>
-                                            seat.available ? (
-                                                <Seat
-                                                    key={`${index}-${seatIndex}`}
-                                                    seat={seat}
-                                                    onSelect={handleSeatSelect}
-                                                    isSelected={selectedSeatCode === seat.code} />
-                                            ) : (
-                                                <p key={`${index}-${seatIndex}`}></p>
-                                            )
-                                        )
+                                        row.seats.map((seat, seatIndex) => {
+
+                                            if (seat.code) {
+                                                // Extract only the numeric part from the code
+                                                const numericCode = seat.code.match(/\d+/)?.[0];
+                                                lastCode = numericCode || seat.code;
+                                            }
+
+                                            if ((seat.available) || (seat.storefrontSlotCode === "SEAT" && seat.available == false)) {
+                                                return (
+                                                    <Seat
+                                                        key={`${index}-${seatIndex}`}
+                                                        seat={seat}
+                                                        onSelect={handleSeatSelect}
+                                                        isSelected={selectedSeatCode === seat.code}
+                                                        isUnavailable={true}
+                                                    />
+                                                );
+                                            }
+
+                                            else if (seat.storefrontSlotCode === "AISLE" && seat.storefrontSlotCode != "SEAT") {
+                                                return <p key={`${index}-${seatIndex}`} className='ps-8 pt-6'>  {lastCode} </p>;
+                                            } else {
+                                                return <p key={`${index}-${seatIndex}`}></p>;
+                                            }
+                                        })
                                     )}
                             </div>
                         </div>
