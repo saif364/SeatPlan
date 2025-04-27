@@ -134,33 +134,44 @@ function SeatMap() {
                                 </p>
                             </div>
                         </div>
-                        <div className={`m-2 p-2 box-border bg-blue-100 ${globalStyles.shadowrounded}`}>
+                        <div className={`m-2 p-2 box-border bg-gray-100 ${globalStyles.shadowrounded}`}>
                             <div>
-                                <h1 className="text-1xl font-bold">
+                                <div className="flex items-center justify-start mb-2">
+                                    <div className="w-4 h-4 bg-gray-400 rounded-full mr-2"></div>
                                     Flight Number  :{' '}
                                     {segment?.flight?.flightNumber}
-                                </h1>
-                                <h1 className="text-1xl font-bold">
+                                </div>
+
+                                <div className="flex items-center justify-start mb-2">
+                                    <div className="w-4 h-4 bg-gray-400 rounded-full mr-2"></div>
                                     Departure :{' '}
                                     {segment?.departure ? new Date(segment.departure).toLocaleString() : 'No Departure Time Available'}
-                                </h1>
+                                </div>
 
-                                <h1 className="text-1xl font-bold">
+                                <div className="flex items-center justify-start mb-2">
+                                    <div className="w-4 h-4 bg-gray-400 rounded-full mr-2"></div>
                                     Arrival :{' '}
                                     {segment?.departure ? new Date(segment.arrival).toLocaleString() : 'No Departure Time Available'}
-                                </h1>
-                                <h1 className="text-1xl font-bold">
+                                </div>
+
+                                <div className="flex items-center justify-start mb-2">
+                                    <div className="w-4 h-4 bg-gray-400 rounded-full mr-2"></div>
                                     Duration :{' '}
                                     {segment?.duration} hours
-                                </h1>
-                                <h1 className="text-1xl font-bold">
+                                </div>
+
+                                <div className="flex items-center justify-start mb-2">
+                                    <div className="w-4 h-4 bg-gray-400 rounded-full mr-2"></div>
                                     Departure Terminal :{' '}
                                     {segment?.flight?.departureTerminal}
-                                </h1>
-                                <h1 className="text-1xl font-bold">
+                                </div>
+
+                                <div className="flex items-center justify-start mb-2">
+                                    <div className="w-4 h-4 bg-gray-400 rounded-full mr-2"></div>
                                     Arrival Terminal :{' '}
                                     {segment?.flight?.arrivalTerminal}
-                                </h1>
+                                </div>
+
                             </div>
                             <div></div>
                         </div>

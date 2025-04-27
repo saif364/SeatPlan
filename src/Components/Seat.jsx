@@ -78,9 +78,19 @@ function Seat({ seat }) {
                     }}
                 >
                     <div>
+                        {seat?.rawSeatCharacteristics.includes("W") && (
+                            <div className="font-bold text-sm">{seat.code + '- Window Seat'}</div>
+                        )}
+                        {seat?.rawSeatCharacteristics.includes("A") && (
 
-                        <div className="font-bold text-sm">{seat.code + '-' + seat.storefrontSlotCode}</div>
-                        <div className="text-sm font-bold"> Cost: {seat?.prices?.alternatives[0][0].amount + '/' + seat?.prices?.alternatives[0][0].currency}</div>
+                            <div className="font-bold text-sm">{seat.code + '- Aisle Seat'}</div>
+                        )}
+
+                        {seat?.rawSeatCharacteristics.includes("9") && (
+
+                            <div className="font-bold text-sm">{seat.code + '- Center Seat'}</div>
+                        )}
+                        <div className="text-sm font-bold"> Cost: {seat?.freeOfCharge == false ? "Fee Aplied" : "Free of Cost"}</div>
                     </div>
 
                     <div className=''
