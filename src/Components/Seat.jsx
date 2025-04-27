@@ -1,18 +1,18 @@
 import React, { useState, useRef } from 'react';
 import { FaChair } from 'react-icons/fa';
 import { useGlobalStyles } from '../contexts/GlobalStylesContext';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 
 
 
-function Seat({ seat }) {
+function Seat({ seat, isSelected, onSelect }) {
     const { globalStyles } = useGlobalStyles();
     const [showTooltip, setShowTooltip] = useState(false);
     const divRef = useRef(null);
-    const [color, setColor] = useState('bg-blue-200');
     const [seatType, setSeatType] = useState('');
-    const navigate = useNavigate();
+
+    const color = isSelected ? 'bg-green-200' : seat.available ? 'bg-blue-200' : 'bg-gray-300';
+
 
     const handleClick = () => {
 
@@ -66,15 +66,16 @@ function Seat({ seat }) {
     }, []);
 
     const onSeatSelected = () => {
-        navigate('/');
-        setColor('bg-green-200');
-        setShowTooltip(false);
+
+        if (seat.available) {
+            onSelect(seat.code); // Notify parent about the selected seat
+        }
 
     }
 
     const onUnSeatSelected = () => {
 
-        setColor('bg-blue-200');
+
         setShowTooltip(false);
     }
 

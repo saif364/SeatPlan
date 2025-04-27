@@ -12,6 +12,7 @@ function App() {
           <div className="App">
             <Routes>
               <Route path="/" element={<SeatMap />} />
+              <Route path="/SeatMap" element={<SeatMap />} />
             </Routes>
           </div>
         </Router>

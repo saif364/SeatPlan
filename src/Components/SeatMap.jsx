@@ -14,6 +14,8 @@ function SeatMap() {
     const [passenger, setPassenger] = useState(null);
     //const [seatRows, setseatRows] = useState(null);
     const [segment, setsegment] = useState(null);
+    const [selectedSeat, setSelectedSeat] = useState(null);
+
 
     var seatRows = data.seatsItineraryParts[0]?.segmentSeatMaps[0]?.passengerSeatMaps[0]?.seatMap?.cabins[0]?.seatRows;
 
@@ -35,6 +37,9 @@ function SeatMap() {
     }, []);
 
 
+    const handleSeatSelect = (seatCode) => {
+        setSelectedSeat(seatCode);
+    };
 
 
     return (
@@ -110,7 +115,11 @@ function SeatMap() {
                                     seatRows.map((row, index) =>
                                         row.seats.map((seat, seatIndex) =>
                                             seat.available ? (
-                                                <Seat key={`${index}-${seatIndex}`} seat={seat} />
+                                                <Seat
+                                                    key={`${index}-${seatIndex}`}
+                                                    seat={seat}
+                                                    onSelect={handleSeatSelect}
+                                                    isSelected={selectedSeat === seat.code} />
                                             ) : (
                                                 <p key={`${index}-${seatIndex}`}></p>
                                             )
