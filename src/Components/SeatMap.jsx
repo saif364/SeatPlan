@@ -15,7 +15,7 @@ function SeatMap() {
     //const [seatRows, setseatRows] = useState(null);
     const [segment, setsegment] = useState(null);
     const [selectedSeatCode, setSelectedSeatCode] = useState(null);
-    const [selectedCharacteristics, setSelectedCharacteristics] = useState(null);
+    const [selectedCharacteristics, setSelectedCharacteristics] = useState([]);
 
 
     var seatRows = data.seatsItineraryParts[0]?.segmentSeatMaps[0]?.passengerSeatMaps[0]?.seatMap?.cabins[0]?.seatRows;
@@ -42,7 +42,7 @@ function SeatMap() {
         for (const row of seatRows) {
             for (const seat of row.seats) {
                 if (seat.code === seatCode) {
-                    return seat.seatCharacteristics;
+                    return seat.rawSeatCharacteristics;
                 }
             }
         }
@@ -50,11 +50,52 @@ function SeatMap() {
         return null;
     }
 
+    const getFullSetType = (type) => {
+
+        if (type == "W") {
+            return "Window Seat";
+        }
+        else if (type == "A") {
+            return "Aisle Seat";
+        }
+        else if (type == "9") {
+            return "Center Seat";
+        }
+
+        if (type === "CH") {
+            return "Child Seat";
+        }
+        if (type === "RS") {
+            return "Reserved Seat";
+        }
+        if (type === "FC") {
+            return "First Class Seat";
+        }
+        if (type === "LS") {
+            return "Luxury Seat";
+        }
+        if (type === "L") {
+            return "Legroom Seat";
+        }
+        if (type === "K") {
+            return "Kid-Friendly Seat";
+        }
+        if (type === "OW") {
+            return "Overwing Seat";
+        }
+    }
+
     const handleSeatSelect = (seatCode) => {
         setSelectedSeatCode(seatCode);
+        var arrcharectestics = [];
         var charectestics = getSeatCharacteristicsByCode(seatCode);
-        setSelectedCharacteristics(charectestics);
+        charectestics.map((type) => {
+            arrcharectestics.push(getFullSetType(type));
+        });
+        setSelectedCharacteristics(arrcharectestics);
     };
+
+
 
 
     return (
@@ -126,6 +167,14 @@ function SeatMap() {
                     <div className={`col-span-2 bg-gray-100 ${globalStyles.shadowrounded}`}>
                         <div className={`p-2 bg-gray-100 ${globalStyles.shadowrounded}`}>
                             <div className="grid grid-cols-9 gap-2">
+                                {['', 'a', 'b', 'c', '', 'd', 'e', 'f'].map((label, index) => (
+                                    <div key={index} className="text-center font-bold text-blue-700">
+                                        {label.toUpperCase()}
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="grid grid-cols-9 gap-2">
+
                                 {seatRows &&
                                     seatRows.map((row, index) =>
                                         row.seats.map((seat, seatIndex) =>
@@ -156,14 +205,14 @@ function SeatMap() {
                                 <p className={`bg-blue-100 px-2 py-1 text-xl my-2 font-bold text-blue-700 ${globalStyles.shadowrounded}`}> Selected Seat Details</p>
 
 
-                                {/* {
+                                {
                                     selectedCharacteristics.map((type) => (
-                                        <div key={type} className="flex items-center justify-start mb-2 shadow-md p-2 rounded-2xl bg-white">
+                                        <div key={type} className="flex items-center justify-start mb-2 shadow-md p-2 rounded-2xl bg-green-100">
                                             <div className="w-4 h-4 bg-gray-400 rounded-full mr-2"></div>
                                             {type}
                                         </div>
                                     ))
-                                } */}
+                                }
 
 
                             </div>

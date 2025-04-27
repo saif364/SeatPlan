@@ -73,11 +73,7 @@ function Seat({ seat, isSelected, onSelect }) {
 
     }
 
-    const onUnSeatSelected = () => {
 
-
-        setShowTooltip(false);
-    }
 
     return (
         <div className={`   ${globalStyles.shadowrounded} `} style={{ position: 'relative' }}>
@@ -130,13 +126,8 @@ function Seat({ seat, isSelected, onSelect }) {
                             right: '10px',
                         }}
                     >
-                        <button
-                            onClick={onUnSeatSelected}
-                            className="p-2 bg-yellow-400 text-white px-2 py-1 text-sm rounded hover:bg-yellow-600 transition duration-300"
-                        >
-                            Un-Select
-                        </button>
-                        &nbsp;
+
+
                         <button
                             onClick={() => onSeatSelected(seat)}
                             className=" bg-green-300 text-white px-2 py-1 text-sm rounded hover:bg-green-500 transition duration-300"
