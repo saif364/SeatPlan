@@ -8,10 +8,43 @@ function Seat({ seat }) {
     const [showTooltip, setShowTooltip] = useState(false);
     const divRef = useRef(null);
     const [color, setColor] = useState('bg-blue-200');
+    const [seatType, setSeatType] = useState('');
 
     const handleClick = () => {
+
+        setSeat();
         setShowTooltip(!showTooltip);
     };
+
+    const setSeat = () => {
+        var seatTypeStr = "";
+        seat?.rawSeatCharacteristics.map((type) => {
+            if (type == "W") {
+                seatTypeStr += "Window Seat, "
+            }
+            else if (type == "A") {
+                seatTypeStr += "Aisle Seat, "
+            }
+            else if (type == "9") {
+                seatTypeStr += "Center Seat, "
+            }
+
+            if (type === "CH") {
+                seatTypeStr += "Child Seat, ";
+            }
+            if (type === "RS") {
+                seatTypeStr += "Reserved Seat, ";
+            }
+            if (type === "FC") {
+                seatTypeStr += "First Class Seat, ";
+            }
+            if (type === "LS") {
+                seatTypeStr += "Luxury Seat, ";
+            }
+        })
+
+        setSeatType(seatTypeStr);
+    }
 
     const handleOutsideClick = (event) => {
         // Close the tooltip if the click is outside the div and tooltip
@@ -78,19 +111,8 @@ function Seat({ seat }) {
                     }}
                 >
                     <div>
-                        {seat?.rawSeatCharacteristics.includes("W") && (
-                            <div className="font-bold text-sm">{seat.code + '- Window Seat'}</div>
-                        )}
-                        {seat?.rawSeatCharacteristics.includes("A") && (
-
-                            <div className="font-bold text-sm">{seat.code + '- Aisle Seat'}</div>
-                        )}
-
-                        {seat?.rawSeatCharacteristics.includes("9") && (
-
-                            <div className="font-bold text-sm">{seat.code + '- Center Seat'}</div>
-                        )}
-                        <div className="text-sm font-bold"> Cost: {seat?.freeOfCharge == false ? "Fee Aplied" : "Free of Cost"}</div>
+                        <div className="text-sm"><span className='text-green-400 font-bold'>{seat.code} </span> {' - ' + seatType}</div>
+                        <div className="text-sm"> <span className='text-green-400 font-bold'>Cost:</span>  {seat?.freeOfCharge == false ? "Fee Aplied" : "Free of Cost"}</div>
                     </div>
 
                     <div className=''
@@ -102,14 +124,14 @@ function Seat({ seat }) {
                     >
                         <button
                             onClick={onUnSeatSelected}
-                            className="p-2 bg-yellow-400 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300"
+                            className="p-2 bg-yellow-400 text-white px-2 py-1 text-sm rounded hover:bg-yellow-600 transition duration-300"
                         >
                             Un-Select
                         </button>
                         &nbsp;
                         <button
                             onClick={() => onSeatSelected(seat)}
-                            className=" bg-green-300 text-white px-4 py-2 rounded hover:bg-green-500 transition duration-300"
+                            className=" bg-green-300 text-white px-2 py-1 text-sm rounded hover:bg-green-500 transition duration-300"
                         >
                             Select Seat
                         </button>
