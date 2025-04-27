@@ -12,7 +12,6 @@ function SeatMap() {
     const { globalStyles } = useGlobalStyles();
     const [seatMap, setSeatMap] = useState(null);
     const [passenger, setPassenger] = useState(null);
-    //const [seatRows, setseatRows] = useState(null);
     const [segment, setsegment] = useState(null);
     const [selectedSeatCode, setSelectedSeatCode] = useState(null);
     const [selectedCharacteristics, setSelectedCharacteristics] = useState([]);
@@ -28,7 +27,6 @@ function SeatMap() {
 
             const seatMapData = data.seatsItineraryParts[0]?.segmentSeatMaps[0]?.passengerSeatMaps[0]?.seatMap;
             setSeatMap(seatMapData);
-            // setseatRows(seatMapData?.cabins[0]?.seatRows);
 
             const passengers = data.seatsItineraryParts[0]?.segmentSeatMaps[0]?.passengerSeatMaps[0]?.passenger;
             setPassenger(passengers);
@@ -185,7 +183,6 @@ function SeatMap() {
                                         row.seats.map((seat, seatIndex) => {
 
                                             if (seat.code) {
-                                                // Extract only the numeric part from the code
                                                 const numericCode = seat.code.match(/\d+/)?.[0];
                                                 lastCode = numericCode || seat.code;
                                             }

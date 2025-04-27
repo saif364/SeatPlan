@@ -53,13 +53,12 @@ function Seat({ seat, isSelected, onSelect, isUnavailable }) {
     }
 
     const handleOutsideClick = (event) => {
-        // Close the tooltip if the click is outside the div and tooltip
         if (divRef.current && !divRef.current.contains(event.target) && !event.target.closest('.tooltip')) {
             setShowTooltip(false);
         }
     };
 
-    // Add event listener for outside clicks
+
     React.useEffect(() => {
         document.addEventListener('mousedown', handleOutsideClick);
         return () => {
@@ -70,7 +69,7 @@ function Seat({ seat, isSelected, onSelect, isUnavailable }) {
     const onSeatSelected = () => {
 
         if (seat.available) {
-            onSelect(seat.code); // Notify parent about the selected seat
+            onSelect(seat.code);
         }
 
     }
@@ -113,7 +112,7 @@ function Seat({ seat, isSelected, onSelect, isUnavailable }) {
                     className="tooltip shadow-neutral-400 rounded-4xl bg-white text-black absolute text-left"
                     style={{
                         position: 'absolute',
-                        top: '-120px', // Position above the div
+                        top: '-120px',
                         left: '50%',
                         transform: 'translateX(-50%)',
                         padding: '10px',
@@ -154,14 +153,14 @@ function Seat({ seat, isSelected, onSelect, isUnavailable }) {
                         className="tooltip-arrow"
                         style={{
                             position: 'absolute',
-                            bottom: '-10px', // Position the arrow below the tooltip
+                            bottom: '-10px',
                             left: '50%',
                             transform: 'translateX(-50%)',
                             width: '0',
                             height: '0',
                             borderLeft: '5px solid transparent',
                             borderRight: '5px solid transparent',
-                            borderTop: '10px solid white', // Match the tooltip background color
+                            borderTop: '10px solid white',
                         }}
                     ></div>
                 </div>
