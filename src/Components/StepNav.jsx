@@ -12,17 +12,17 @@ const StepNav = () => {
     ];
 
     return (
-        <div className="flex justify-center w-full">
-            <div className="flex items-center">
+        <div className="flex justify-center w-full px-4">
+            <div className="flex items-center flex-wrap">
                 {steps.map((step, index) => (
                     <div
                         key={index}
-                        className={`relative flex items-center ${index !== steps.length - 1 ? 'mr-10' : ''}`}
+                        className={`relative flex items-center ${index !== steps.length - 1 ? 'mr-4 md:mr-10' : ''}`}
                     >
                         <div
                             className={`flex items-center justify-center w-12 h-12 rounded-full ${activeStep >= index
-                                ? 'bg-teal-500 text-white'
-                                : 'bg-gray-300 text-gray-500'
+                                ? 'bg-teal-500 text-white cursor-pointer'
+                                : 'bg-gray-300 text-gray-500 cursor-pointer'
                                 }`}
                             onClick={() => setActiveStep(index)}
                         >
@@ -30,8 +30,8 @@ const StepNav = () => {
                         </div>
                         <div
                             className={`ml-2 ${activeStep >= index
-                                ? 'text-teal-500'
-                                : 'text-gray-500'
+                                ? 'text-teal-500 text-sm md:text-base'
+                                : 'text-gray-500 text-sm md:text-base'
                                 }`}
                         >
                             {step.name}

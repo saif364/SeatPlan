@@ -87,6 +87,7 @@ function Seat({ seat, isSelected, onSelect, isUnavailable }) {
                         ref={divRef}
                         className={`p-1 ${color} rounded-xl cursor-pointer hover:bg-blue-300 transition duration-300 ease-in-out flex flex-col justify-center items-center`}
                         style={{ width: '60px', margin: '0 auto' }}
+                        className="sm:w-16 md:w-20 lg:w-24"
                     >
                         <FaChair size={40} />
                         <div className="text-center">
@@ -121,8 +122,10 @@ function Seat({ seat, isSelected, onSelect, isUnavailable }) {
                         borderRadius: '5px',
                         boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
                         zIndex: '1000',
-                        textAlign: 'center',
-                        width: '250px',
+                        width: '90%',
+                        maxWidth: '250px',
+                        height: 'auto',
+                        minHeight: '120px',
                         height: '120px',
 
                     }}
@@ -141,7 +144,7 @@ function Seat({ seat, isSelected, onSelect, isUnavailable }) {
                         }}
                     >
 
-
+                        className="bg-green-300 text-white px-2 py-1 text-xs sm:text-sm rounded hover:bg-green-500 transition duration-300"
                         <button
                             onClick={() => onSeatSelected(seat)}
                             className=" bg-green-300 text-white px-2 py-1 text-sm rounded hover:bg-green-500 transition duration-300"
